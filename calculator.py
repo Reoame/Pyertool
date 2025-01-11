@@ -1,5 +1,5 @@
 import tkinter as tk
-
+import math
 def calculator():
     calculatorwindow = tk.Toplevel()
     calculatorwindow.title("计算器")

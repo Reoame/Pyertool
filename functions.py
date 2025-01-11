@@ -11,7 +11,6 @@ import os
 def markdown_html():
     markdownwindow = tk.Toplevel()
     markdownwindow.title("MDEDIT")
-
     # 设置窗口大小
     markdownwindow.geometry("800x600")
 
