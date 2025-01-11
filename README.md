@@ -1,6 +1,6 @@
 # Pyertool
 
-> 提示：GitHub地址：https://github.com/Reoame/My_invention
+
 ## 关于这个项目
 
 这是我在学习Python过程中做的一些小工具，欢迎大家提出宝贵意见。
