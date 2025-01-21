@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Code Editor</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/codemirror.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/mode/python/python.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>Python Code Editor</h1>
+    <textarea id="code-editor"></textarea>
+    <button id="run-button">Run Code</button>
+    <pre id="output"></pre>
+    <script>
+        var editor = CodeMirror.fromTextArea(document.getElementById("code-editor"), {
+            mode: "python",
+            lineNumbers: true
+        });
+        $(document).ready(function() {
+            $("#run-button").click(function() {
+                var code = editor.getValue();
+                $.ajax({
+                    url: "/run_code",
+                    type: "POST",
+                    contentType: "application/json",
+                    data: JSON.stringify({"code": code}),
+                    success: function(response) {
+                        if (response.error) {
+                            $("#output").text("Error: " + response.error);
+                        } else {
+                            $("#output").text(response.output);
+                        }
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        $("#output").text("Error: " + textStatus + " " + errorThrown);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
